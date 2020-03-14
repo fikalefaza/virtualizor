@@ -1,4 +1,4 @@
-# Virtualizor
+# Virtualizor DOCKER
 
 Virtualizor is a powerful web based VPS Control Panel which a user can deploy and manage VPS on servers with a single click. This will install the master server from which you can contrl your slave servers.
 
@@ -16,6 +16,10 @@ docker create --rm \
            -v /etc/localtime:/etc/localtime:ro \
            -v /opt/virtualizor:/usr/local/emps/ \
            nottt/virtualizor
+```
+or 
+```
+docker create --rm  --name virtualizor -p 4084:4084 -p 4085:4085  -e PUID=1000   -e PGID=1000 -e PASSWORD=yourpassroot -e EMAIL=your@gmail.com -v /etc/localtime:/etc/localtime:ro  -v /opt/virtualizor:/usr/local/emps/ nottt/virtualizor
 ```
 ## Parameters
 
@@ -49,6 +53,8 @@ http://IP:4084/
 
 If you see this you can login to your admin panel, if not check your variables.
 
+
+if the core server uses Google Cloud, make sure the firewall settings are on Google PVC
 #### OS X and Windows
 
 Windows and OS X platforms does not have `/etc/localtime` to retrieve timezone information, so you need to add a `-e TZ=Europe/Amsterdam` variable to your docker command and remove `-v /etc/localtime:/etc/localtime:ro \`. 
